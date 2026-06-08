@@ -67,8 +67,7 @@ if (!empty($_POST['tipo']) && !empty($_POST['valor'])) {
                     <td><?php echo $item->nome; ?></td>
                     <td><?php echo $item->telefone; ?></td>
                     <td><?php echo $item->email; ?></td>
-                    <td><a href='./UsuarioForm.php?id=$item->id' 
-                   class='btn btn-warning' title='Editar' >Editar</a>
+                    <td><a href="UsuarioForm.php?id=<?php echo (int)$item->id; ?>" class='btn btn-warning'>Editar</a>
                         <a class="btn btn-danger btn-sm" onclick="return confirm('Deseja realmente excluir?')" href="./UsuarioList.php?id=<?php echo $item->id; ?>">Deletar</a>
                     </td>
                 </tr>

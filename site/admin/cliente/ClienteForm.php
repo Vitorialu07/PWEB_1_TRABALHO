@@ -6,6 +6,7 @@ $db = new db('cliente');
 $success = '';
 $actionError = '';
 $errors = [];
+$data= []; 
 
 if (!empty($_GET['id'])){
     $data=$db->find(id:$_GET['id']);
@@ -69,22 +70,22 @@ if (!empty($_POST)) {
             </div>
 
              <div class="col-6">
-                <label for="razao_social"></label>
+                <label for="razao_social">Razão social</label>
                 <input type="text" name="razao_social" class="form-control" value="<?php echo getFormValue($data, 'razao_social') ?>">
             </div>
 
              <div class="col-6">
-                <label for="cpf"></label>
+                <label for="cpf">CPF</label>
                 <input type="text" name="cpf" class="form-control" value="<?php echo getFormValue($data, 'cpf') ?>">
             </div>
 
              <div class="col-6">
-                <label for="cnpj"></label>
+                <label for="cnpj">CNPJ</label>
                 <input type="text" name="cnpj" class="form-control" value="<?php echo getFormValue($data, 'cnpj') ?>">
             </div>
 
             <div class="col-6">
-                <label for="email"></label>
+                <label for="email">E-mail</label>
                 <input type="mail" name="email" class="form-control" value="<?php echo getFormValue($data, 'email') ?>">
             </div>
 
@@ -94,17 +95,17 @@ if (!empty($_POST)) {
             </div>
 
              <div class="col-6">
-                <label for="rua"></label>
+                <label for="rua">Rua</label>
                 <input type="text" name="rua" class="form-control" value="<?php echo getFormValue($data, 'rua') ?>">
             </div>
 
             <div class="col-6">
-                <label for="cidade"></label>
+                <label for="cidade">Cidade</label>
                 <input type="text" name="cidade" class="form-control" value="<?php echo getFormValue($data, 'cidade') ?>">
             </div>
 
             <div class="col-6">
-                <label for="cep"></label>
+                <label for="cep">CEP</label>
                 <input type="text" name="cep" class="form-control" value="<?php echo getFormValue($data, 'cep') ?>">
             </div>
 

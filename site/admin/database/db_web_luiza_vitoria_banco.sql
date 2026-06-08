@@ -1,332 +1,119 @@
-SHOW TABLE STATUS FROM `db_web_luiza_vitoria_banco`;
-SHOW FUNCTION STATUS WHERE `Db`='db_web_luiza_vitoria_banco';
-SHOW PROCEDURE STATUS WHERE `Db`='db_web_luiza_vitoria_banco';
-SHOW TRIGGERS FROM `db_web_luiza_vitoria_banco`;
-SELECT *, EVENT_SCHEMA AS `Db`, EVENT_NAME AS `Name` FROM information_schema.`EVENTS` WHERE `EVENT_SCHEMA`='db_web_luiza_vitoria_banco';
-/* Redimensionando controles para tela DPI: 125% */
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='movimentacao_estoque' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `movimentacao_estoque` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='movimentacao_estoque'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='movimentacao_estoque'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SHOW ENGINES;
-SHOW COLLATION;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`movimentacao_estoque`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='movimentacao_estoque' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
-/* #1634496361: Access violation at address 00000056C1800000 in module 'heidisql.exe'. Execution of address 00000056C1800000 Message CharCode:13 Msg:256 */
-ALTER TABLE `movimentacao_estoque`
-	CHANGE COLUMN `id_movimentacao` `id_movimentacao` INT(10) NOT NULL FIRST,
-	ADD COLUMN `id_produto` INT(10) NOT NULL AFTER `id_movimentacao`,
-	ADD PRIMARY KEY (`id_movimentacao`);
-SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='db_web_luiza_vitoria_banco';
-SHOW TABLE STATUS FROM `db_web_luiza_vitoria_banco`;
-SHOW FUNCTION STATUS WHERE `Db`='db_web_luiza_vitoria_banco';
-SHOW PROCEDURE STATUS WHERE `Db`='db_web_luiza_vitoria_banco';
-SHOW TRIGGERS FROM `db_web_luiza_vitoria_banco`;
-SELECT *, EVENT_SCHEMA AS `Db`, EVENT_NAME AS `Name` FROM information_schema.`EVENTS` WHERE `EVENT_SCHEMA`='db_web_luiza_vitoria_banco';
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='movimentacao_estoque' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `movimentacao_estoque` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='movimentacao_estoque'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='movimentacao_estoque'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-/* Entrando na sessão "Laragon.MySQL" */
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='produto' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `produto` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='produto'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='produto'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`produto`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='produto' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`movimentacao_estoque`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='movimentacao_estoque' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
-/* #1634496361: Access violation at address 00000056C1800000 in module 'heidisql.exe'. Execution of address 00000056C1800000 Message CharCode:13 Msg:256 */
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='funcionario' ORDER BY ORDINAL_POSITION;
-ALTER TABLE `movimentacao_estoque`
-	ADD COLUMN `id_funcionario` INT(10) NOT NULL AFTER `id_produto`,
-	ADD CONSTRAINT `id_produto_movimentacao` FOREIGN KEY (`id_produto`) REFERENCES `produto` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION,
-	ADD CONSTRAINT `id_funcionario_movimentacao` FOREIGN KEY (`id_funcionario`) REFERENCES `funcionario` (`id_funcionario`) ON UPDATE NO ACTION ON DELETE NO ACTION;
-SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='db_web_luiza_vitoria_banco';
-SHOW TABLE STATUS FROM `db_web_luiza_vitoria_banco`;
-SHOW FUNCTION STATUS WHERE `Db`='db_web_luiza_vitoria_banco';
-SHOW PROCEDURE STATUS WHERE `Db`='db_web_luiza_vitoria_banco';
-SHOW TRIGGERS FROM `db_web_luiza_vitoria_banco`;
-SELECT *, EVENT_SCHEMA AS `Db`, EVENT_NAME AS `Name` FROM information_schema.`EVENTS` WHERE `EVENT_SCHEMA`='db_web_luiza_vitoria_banco';
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='movimentacao_estoque' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `movimentacao_estoque` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='movimentacao_estoque'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='movimentacao_estoque'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-/* Entrando na sessão "Laragon.MySQL" */
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`movimentacao_estoque`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='movimentacao_estoque' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='cliente' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `cliente` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='cliente'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='cliente'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`cliente`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='cliente' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
-/* #1634496361: Access violation at address 00000000005DE1FB in module 'heidisql.exe'. Read of address 0000000000000000 Message CharCode:13 Msg:256 */
-ALTER TABLE `cliente`
-	CHANGE COLUMN `cidade_estado` `cidade` VARCHAR(50) NOT NULL DEFAULT '' COLLATE 'utf8mb4_0900_ai_ci' AFTER `rua`;
-SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='db_web_luiza_vitoria_banco';
-SHOW TABLE STATUS FROM `db_web_luiza_vitoria_banco`;
-SHOW FUNCTION STATUS WHERE `Db`='db_web_luiza_vitoria_banco';
-SHOW PROCEDURE STATUS WHERE `Db`='db_web_luiza_vitoria_banco';
-SHOW TRIGGERS FROM `db_web_luiza_vitoria_banco`;
-SELECT *, EVENT_SCHEMA AS `Db`, EVENT_NAME AS `Name` FROM information_schema.`EVENTS` WHERE `EVENT_SCHEMA`='db_web_luiza_vitoria_banco';
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='cliente' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `cliente` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='cliente'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='cliente'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-/* Entrando na sessão "Laragon.MySQL" */
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='movimentacao_estoque' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `movimentacao_estoque` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='movimentacao_estoque'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='movimentacao_estoque'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`movimentacao_estoque`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='movimentacao_estoque' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='funcionario' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `funcionario` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='funcionario'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='funcionario'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`funcionario`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='funcionario' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`cliente`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='cliente' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`funcionario`;
-/* #87: Abstract Error Message CharCode:0 Msg:514 */
-/* #2: Abstract Error Message CharCode:0 Msg:514 */
-ALTER TABLE `funcionario`
-	CHANGE COLUMN `status` `status` VARCHAR(50) NOT NULL DEFAULT '' COLLATE 'utf8mb4_0900_ai_ci' AFTER `funcao`;
-SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='db_web_luiza_vitoria_banco';
-SHOW TABLE STATUS FROM `db_web_luiza_vitoria_banco`;
-SHOW FUNCTION STATUS WHERE `Db`='db_web_luiza_vitoria_banco';
-SHOW PROCEDURE STATUS WHERE `Db`='db_web_luiza_vitoria_banco';
-SHOW TRIGGERS FROM `db_web_luiza_vitoria_banco`;
-SELECT *, EVENT_SCHEMA AS `Db`, EVENT_NAME AS `Name` FROM information_schema.`EVENTS` WHERE `EVENT_SCHEMA`='db_web_luiza_vitoria_banco';
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='funcionario' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `funcionario` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='funcionario'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='funcionario'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-/* Entrando na sessão "Laragon.MySQL" */
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`funcionario`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='funcionario' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='produto' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `produto` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='produto'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='produto'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`produto`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='produto' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
-/* #42: Abstract Error Message CharCode:0 Msg:514 */
-/* #1634496361: Access violation at address 00000056C1800000 in module 'heidisql.exe'. Execution of address 00000056C1800000 Message CharCode:13 Msg:256 */
-ALTER TABLE `produto`
-	CHANGE COLUMN `categoria` `descrição` VARCHAR(100) NOT NULL DEFAULT '' COLLATE 'utf8mb4_0900_ai_ci' AFTER `nome`,
-	DROP COLUMN `tipo_lente`;
-SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='db_web_luiza_vitoria_banco';
-SHOW TABLE STATUS FROM `db_web_luiza_vitoria_banco`;
-SHOW FUNCTION STATUS WHERE `Db`='db_web_luiza_vitoria_banco';
-SHOW PROCEDURE STATUS WHERE `Db`='db_web_luiza_vitoria_banco';
-SHOW TRIGGERS FROM `db_web_luiza_vitoria_banco`;
-SELECT *, EVENT_SCHEMA AS `Db`, EVENT_NAME AS `Name` FROM information_schema.`EVENTS` WHERE `EVENT_SCHEMA`='db_web_luiza_vitoria_banco';
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='produto' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `produto` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='produto'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='produto'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-/* Entrando na sessão "Laragon.MySQL" */
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`produto`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='produto' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
-SHOW VARIABLES;
-/* #1634496361: Access violation at address 00000056C1800000 in module 'heidisql.exe'. Execution of address 00000056C1800000 Message CharCode:13 Msg:256 */
-/* #69: Abstract Error Message CharCode:0 Msg:514 */
-/* #25: Abstract Error Message CharCode:0 Msg:514 */
-/* #64: Abstract Error Message CharCode:0 Msg:514 */
-/* #78: Abstract Error Message CharCode:0 Msg:514 */
-/* #3: Abstract Error Message CharCode:0 Msg:514 */
-CREATE TABLE `usuario` (
-	`id_usuario` INT NOT NULL,
-	`nome` VARCHAR(50) NOT NULL DEFAULT '',
-	`email` VARCHAR(50) NOT NULL DEFAULT '',
-	`login` VARCHAR(50) NOT NULL DEFAULT '',
-	`senha` INT NOT NULL,
-	PRIMARY KEY (`id_usuario`)
-)
-COLLATE='utf8mb4_0900_ai_ci'
-;
-SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='db_web_luiza_vitoria_banco';
-SHOW TABLE STATUS FROM `db_web_luiza_vitoria_banco`;
-SHOW FUNCTION STATUS WHERE `Db`='db_web_luiza_vitoria_banco';
-SHOW PROCEDURE STATUS WHERE `Db`='db_web_luiza_vitoria_banco';
-SHOW TRIGGERS FROM `db_web_luiza_vitoria_banco`;
-SELECT *, EVENT_SCHEMA AS `Db`, EVENT_NAME AS `Name` FROM information_schema.`EVENTS` WHERE `EVENT_SCHEMA`='db_web_luiza_vitoria_banco';
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='usuario' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `usuario` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='usuario'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='usuario'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-/* Entrando na sessão "Laragon.MySQL" */
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`usuario`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='usuario' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
-/* #46: Abstract Error Message CharCode:0 Msg:514 */
-ALTER TABLE `usuario`
-	CHANGE COLUMN `senha` `senha` VARCHAR(50) NOT NULL DEFAULT '' AFTER `login`;
-SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='db_web_luiza_vitoria_banco';
-SHOW TABLE STATUS FROM `db_web_luiza_vitoria_banco`;
-SHOW FUNCTION STATUS WHERE `Db`='db_web_luiza_vitoria_banco';
-SHOW PROCEDURE STATUS WHERE `Db`='db_web_luiza_vitoria_banco';
-SHOW TRIGGERS FROM `db_web_luiza_vitoria_banco`;
-SELECT *, EVENT_SCHEMA AS `Db`, EVENT_NAME AS `Name` FROM information_schema.`EVENTS` WHERE `EVENT_SCHEMA`='db_web_luiza_vitoria_banco';
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='usuario' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `usuario` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='usuario'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='usuario'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-/* Entrando na sessão "Laragon.MySQL" */
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`usuario`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='usuario' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='estoque' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `estoque` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='estoque'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='estoque'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`estoque`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='estoque' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='produto' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `produto` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='produto'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='produto'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`produto`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='produto' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='cliente' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `cliente` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='cliente'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='cliente'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`cliente`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='cliente' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
-ALTER TABLE `cliente`
-	CHANGE COLUMN `id_cliente` `id` INT(10) NOT NULL FIRST,
-	DROP PRIMARY KEY,
-	ADD PRIMARY KEY (`id`) USING BTREE;
-SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='db_web_luiza_vitoria_banco';
-SHOW TABLE STATUS FROM `db_web_luiza_vitoria_banco`;
-SHOW FUNCTION STATUS WHERE `Db`='db_web_luiza_vitoria_banco';
-SHOW PROCEDURE STATUS WHERE `Db`='db_web_luiza_vitoria_banco';
-SHOW TRIGGERS FROM `db_web_luiza_vitoria_banco`;
-SELECT *, EVENT_SCHEMA AS `Db`, EVENT_NAME AS `Name` FROM information_schema.`EVENTS` WHERE `EVENT_SCHEMA`='db_web_luiza_vitoria_banco';
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='cliente' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `cliente` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='cliente'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='cliente'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-/* Entrando na sessão "Laragon.MySQL" */
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='movimentacao_estoque' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `movimentacao_estoque` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='movimentacao_estoque'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='movimentacao_estoque'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`movimentacao_estoque`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='movimentacao_estoque' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='estoque' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `estoque` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='estoque'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='estoque'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`estoque`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='estoque' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`cliente`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='cliente' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`estoque`;
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='funcionario' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `funcionario` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='funcionario'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='funcionario'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`funcionario`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='funcionario' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
-ALTER TABLE `funcionario`
-	CHANGE COLUMN `id_funcionario` `id` INT(10) NOT NULL FIRST,
-	DROP PRIMARY KEY,
-	ADD PRIMARY KEY (`id`) USING BTREE;
-SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='db_web_luiza_vitoria_banco';
-SHOW TABLE STATUS FROM `db_web_luiza_vitoria_banco`;
-SHOW FUNCTION STATUS WHERE `Db`='db_web_luiza_vitoria_banco';
-SHOW PROCEDURE STATUS WHERE `Db`='db_web_luiza_vitoria_banco';
-SHOW TRIGGERS FROM `db_web_luiza_vitoria_banco`;
-SELECT *, EVENT_SCHEMA AS `Db`, EVENT_NAME AS `Name` FROM information_schema.`EVENTS` WHERE `EVENT_SCHEMA`='db_web_luiza_vitoria_banco';
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='funcionario' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `funcionario` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='funcionario'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='funcionario'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-/* Entrando na sessão "Laragon.MySQL" */
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`funcionario`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='funcionario' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='movimentacao_estoque' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `movimentacao_estoque` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='movimentacao_estoque'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='movimentacao_estoque'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`movimentacao_estoque`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='movimentacao_estoque' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='estoque' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `estoque` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='estoque'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='estoque'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`estoque`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='estoque' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`movimentacao_estoque`;
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='cliente' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `cliente` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='cliente'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='cliente'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`cliente`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='cliente' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`estoque`;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`movimentacao_estoque`;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`funcionario`;
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='produto' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `produto` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='produto'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='produto'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`produto`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='produto' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='usuario' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `usuario` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='usuario'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='usuario'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`usuario`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='usuario' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
-ALTER TABLE `usuario`
-	CHANGE COLUMN `id_usuario` `id` INT(10) NOT NULL FIRST,
-	DROP PRIMARY KEY,
-	ADD PRIMARY KEY (`id`) USING BTREE;
-SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='db_web_luiza_vitoria_banco';
-SHOW TABLE STATUS FROM `db_web_luiza_vitoria_banco`;
-SHOW FUNCTION STATUS WHERE `Db`='db_web_luiza_vitoria_banco';
-SHOW PROCEDURE STATUS WHERE `Db`='db_web_luiza_vitoria_banco';
-SHOW TRIGGERS FROM `db_web_luiza_vitoria_banco`;
-SELECT *, EVENT_SCHEMA AS `Db`, EVENT_NAME AS `Name` FROM information_schema.`EVENTS` WHERE `EVENT_SCHEMA`='db_web_luiza_vitoria_banco';
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='usuario' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `usuario` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='usuario'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='usuario'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-/* Entrando na sessão "Laragon.MySQL" */
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='estoque' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `estoque` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='estoque'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='estoque'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`estoque`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='estoque' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
-ALTER TABLE `estoque`
-	CHANGE COLUMN `id_estoque` `id` INT(10) NOT NULL FIRST,
-	DROP PRIMARY KEY,
-	ADD PRIMARY KEY (`id`) USING BTREE;
-SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='db_web_luiza_vitoria_banco';
-SHOW TABLE STATUS FROM `db_web_luiza_vitoria_banco`;
-SHOW FUNCTION STATUS WHERE `Db`='db_web_luiza_vitoria_banco';
-SHOW PROCEDURE STATUS WHERE `Db`='db_web_luiza_vitoria_banco';
-SHOW TRIGGERS FROM `db_web_luiza_vitoria_banco`;
-SELECT *, EVENT_SCHEMA AS `Db`, EVENT_NAME AS `Name` FROM information_schema.`EVENTS` WHERE `EVENT_SCHEMA`='db_web_luiza_vitoria_banco';
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='estoque' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `estoque` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='estoque'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='estoque'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-/* Entrando na sessão "Laragon.MySQL" */
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='produto' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `produto` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='produto'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='produto'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`produto`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='produto' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
-SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='db_web_luiza_vitoria_banco' AND TABLE_NAME='usuario' ORDER BY ORDINAL_POSITION;
-SHOW INDEXES FROM `usuario` FROM `db_web_luiza_vitoria_banco`;
-SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='usuario'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='db_web_luiza_vitoria_banco'   AND TABLE_NAME='usuario'   AND REFERENCED_TABLE_NAME IS NOT NULL;
-SHOW CREATE TABLE `db_web_luiza_vitoria_banco`.`usuario`;
-SELECT tc.CONSTRAINT_NAME, cc.CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` AS cc, `information_schema`.`TABLE_CONSTRAINTS` AS tc WHERE tc.CONSTRAINT_SCHEMA='db_web_luiza_vitoria_banco' AND tc.TABLE_NAME='usuario' AND tc.CONSTRAINT_TYPE='CHECK' AND tc.CONSTRAINT_SCHEMA=cc.CONSTRAINT_SCHEMA AND tc.CONSTRAINT_NAME=cc.CONSTRAINT_NAME;
+-- --------------------------------------------------------
+-- Servidor:                     127.0.0.1
+-- Versão do servidor:           8.0.30 - MySQL Community Server - GPL
+-- OS do Servidor:               Win64
+-- HeidiSQL Versão:              12.1.0.6537
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+-- Copiando estrutura do banco de dados para db_web_luiza_vitoria_banco
+CREATE DATABASE IF NOT EXISTS `db_web_luiza_vitoria_banco` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `db_web_luiza_vitoria_banco`;
+
+-- Copiando estrutura para tabela db_web_luiza_vitoria_banco.cliente
+CREATE TABLE IF NOT EXISTS `cliente` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(50) NOT NULL DEFAULT '',
+  `razao_social` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '',
+  `cpf` varchar(11) DEFAULT '',
+  `cnpj` varchar(14) DEFAULT '',
+  `telefone` varchar(20) NOT NULL DEFAULT '0',
+  `email` varchar(50) NOT NULL DEFAULT '',
+  `rua` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
+  `cidade` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
+  `cep` varchar(9) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Copiando dados para a tabela db_web_luiza_vitoria_banco.cliente: ~0 rows (aproximadamente)
+INSERT INTO `cliente` (`id`, `nome`, `razao_social`, `cpf`, `cnpj`, `telefone`, `email`, `rua`, `cidade`, `cep`) VALUES
+	(1, 'João da Silva', '', '111', '', '999999', 'joao@gmail', 'Dos Bobos', 'Chapecó', '89803');
+
+-- Copiando estrutura para tabela db_web_luiza_vitoria_banco.estoque
+CREATE TABLE IF NOT EXISTS `estoque` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_produto` int NOT NULL,
+  `quantidade` int NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `id_produto` (`id_produto`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Copiando dados para a tabela db_web_luiza_vitoria_banco.estoque: ~0 rows (aproximadamente)
+
+-- Copiando estrutura para tabela db_web_luiza_vitoria_banco.funcionario
+CREATE TABLE IF NOT EXISTS `funcionario` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(50) NOT NULL,
+  `cpf` varchar(11) NOT NULL,
+  `nascimento` date NOT NULL,
+  `admissao` date NOT NULL,
+  `demissao` date DEFAULT NULL,
+  `funcao` varchar(50) NOT NULL DEFAULT '',
+  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
+  `salario` float NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Copiando dados para a tabela db_web_luiza_vitoria_banco.funcionario: ~0 rows (aproximadamente)
+
+-- Copiando estrutura para tabela db_web_luiza_vitoria_banco.movimentacao_estoque
+CREATE TABLE IF NOT EXISTS `movimentacao_estoque` (
+  `id_movimentacao` int NOT NULL AUTO_INCREMENT,
+  `id_produto` int NOT NULL,
+  `id_funcionario` int NOT NULL,
+  `tipo` enum('Entrada','Saída') NOT NULL,
+  `quantidade` int NOT NULL,
+  PRIMARY KEY (`id_movimentacao`),
+  KEY `id_produto_movimentacao` (`id_produto`),
+  KEY `id_funcionario_movimentacao` (`id_funcionario`),
+  CONSTRAINT `id_funcionario_movimentacao` FOREIGN KEY (`id_funcionario`) REFERENCES `funcionario` (`id`),
+  CONSTRAINT `id_produto_movimentacao` FOREIGN KEY (`id_produto`) REFERENCES `produto` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Copiando dados para a tabela db_web_luiza_vitoria_banco.movimentacao_estoque: ~0 rows (aproximadamente)
+
+-- Copiando estrutura para tabela db_web_luiza_vitoria_banco.produto
+CREATE TABLE IF NOT EXISTS `produto` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(50) NOT NULL DEFAULT '',
+  `descrição` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
+  `marca` varchar(50) NOT NULL DEFAULT '',
+  `preco_custo` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `preco_venda` decimal(10,2) NOT NULL DEFAULT '0.00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Copiando dados para a tabela db_web_luiza_vitoria_banco.produto: ~0 rows (aproximadamente)
+
+-- Copiando estrutura para tabela db_web_luiza_vitoria_banco.usuario
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(50) NOT NULL DEFAULT '',
+  `email` varchar(50) NOT NULL DEFAULT '',
+  `login` varchar(50) NOT NULL DEFAULT '',
+  `senha` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
+  `telefone` varchar(30) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Copiando dados para a tabela db_web_luiza_vitoria_banco.usuario: ~0 rows (aproximadamente)
+INSERT INTO `usuario` (`id`, `nome`, `email`, `login`, `senha`, `telefone`) VALUES
+	(2, 'Vitoria', 'vitoria@gmail.com', 'vitoria', '123', '499999999'),
+	(3, 'ana', 'ana@banana', 'ana', '$2y$10$16JGao/N/PJ6hphfhTXFdOgkkiXWAMBzHvgN2aKy18xoIv9teRGqS', '99999'),
+	(8, 'Luiza', 'luiza@gmail.com ', 'luiza', '$2y$10$OMXagKYTZO5M/wLdav1UueTZhaQJNR5frg4hj8PedZTG47bVBHoeG', '9999'),
+	(9, 'Vitoria', 'vi@gmail', 'vitoria', '$2y$10$RO9GBkigK.NY7RgxQs23VOhwmel8Fh7hxCkYoUin70j3mwQLmTswa', '999');
+
+/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;

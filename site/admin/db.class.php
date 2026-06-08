@@ -79,10 +79,15 @@ class db
         }
     }
 
-    public function update($dados){
-    // Garante que $dados seja um array, mesmo se o formulário enviar como objeto
+    public function update($dados)
+{
     if (is_object($dados)) {
         $dados = (array) $dados;
+    }
+
+    // Garante que o ID seja inteiro
+    if (isset($dados['id'])) {
+        $dados['id'] = (int)$dados['id'];
     }
 
     $campos = "";
@@ -90,25 +95,28 @@ class db
     $sep = "";
 
     foreach ($dados as $campo => $valor) {
-        // Usamos trim() para garantir que não existam espaços escondidos como 'id ' ou ' id'
         if (trim($campo) !== 'id') {
             $campos .= $sep . " $campo = ?";
             $vetorData[] = $valor;
             $sep = ", ";
         }
-    }
+    } 
     
-    // O ID da cláusula WHERE precisa do valor correto do ID enviado
     $vetorData[] = $dados['id'];
-    $sql = "UPDATE $this->table_name SET $campos WHERE id = ?;";
+    $sql = "UPDATE $this->table_name SET $campos WHERE id = ?;"; 
+
+    // Debug - veja o que está sendo executado
+    var_dump($sql, $vetorData);
+    exit;
 
     try {
         $st = $this->conn->prepare($sql);
-        $st->execute($vetorData); // Removido o 'params:' para evitar incompatibilidades de versão
+        $st->execute($vetorData); 
     } catch (PDOException $e) {
         throw new Exception("Erro ao atualizar: " . $e->getMessage());
     }
 }
+    
      public function destroy($id){
         try{
                 $sql = "DELETE FROM $this->table_name WHERE id=?;"; 

@@ -1,8 +1,8 @@
 <?php
 include '../header.php';
 include '../autenticacao.php';
-include_once "../database/db.class.php";
-// Inicializa a variável para evitar erros caso o POST seja acionado
+include_once "../db.class.php";
+
 
 // Post para quando o formulário for submetido
 $db = new db('cliente');
