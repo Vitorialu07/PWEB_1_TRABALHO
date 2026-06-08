@@ -34,7 +34,7 @@ if (empty($errors)) {
             $success = "Registro salvo com sucesso!";
             }else {
                 $db->update($_POST);
-                $sucess="Registro atualizado com sucesso!";
+                $success="Registro atualizado com sucesso!";
             }
             
             redirect('./EstoqueList.php');
@@ -50,7 +50,7 @@ if (empty($errors)) {
     <?php actionMessage($success, $actionError) ?>
     <?php showValidationError($errors) ?>
 
-    <form action="UsuarioForm.php" method="post">
+    <form action="EstoqueForm.php" method="post">
         <h3> Gerenciamento de Estoque</h3>
         <input type="hidden" name="id" value="<?php echo getFormValue($data, 'id');?>">
         <div class="row">

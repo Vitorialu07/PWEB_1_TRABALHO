@@ -14,13 +14,11 @@ if (!empty($_GET['id'])){
 
 // Lógica do Filtro de Pesquisa (via POST)
 if (!empty($_POST['tipo']) && !empty($_POST['valor'])) {
-    // Se o formulário foi enviado, busca com filtro
-    // Nota: Certifique-se de que sua classe db possui um método de busca similar a este
-    $dados = $db->search($_POST['tipo'], $_POST['valor']); 
+    $dados = $db->search($_POST); 
 } else {
-    // Se não foi enviado, traz todos os usuários
     $dados = $db->all();
 }
+
 ?> 
 
 <div class="row mb-4">
@@ -69,7 +67,8 @@ if (!empty($_POST['tipo']) && !empty($_POST['valor'])) {
                     <td><?php echo $item->nome; ?></td>
                     <td><?php echo $item->telefone; ?></td>
                     <td><?php echo $item->email; ?></td>
-                    <td>
+                    <td><a href='./UsuarioForm.php?id=$item->id' 
+                   class='btn btn-warning' title='Editar' >Editar</a>
                         <a class="btn btn-danger btn-sm" onclick="return confirm('Deseja realmente excluir?')" href="./UsuarioList.php?id=<?php echo $item->id; ?>">Deletar</a>
                     </td>
                 </tr>

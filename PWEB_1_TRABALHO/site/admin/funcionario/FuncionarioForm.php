@@ -49,7 +49,7 @@ if (empty($errors)) {
             $success = "Registro salvo com sucesso!";
             }else {
                 $db->update($_POST);
-                $sucess="Registro atualizado com sucesso!";
+                $success="Registro atualizado com sucesso!";
             }
             
             redirect('./FuncionarioList.php');
@@ -65,7 +65,7 @@ if (empty($errors)) {
     <?php actionMessage($success, $actionError) ?>
     <?php showValidationError($errors) ?>
 
-    <form action="UsuarioForm.php" method="post">
+    <form action="FuncionarioForm.php" method="post">
         <h3> Formulário Funcionário</h3>
         <input type="hidden" name="id" value="<?php echo getFormValue($data, 'id');?>">
         <div class="row">
@@ -109,7 +109,7 @@ if (empty($errors)) {
 
             <div class="mt-2">
                 <button type="submit" class="btn btn-success">Salvar</button>
-                <a href="./UsuarioList.php" class="btn btn-primary">Voltar</a>
+                <a href="./FuncionarioList.php" class="btn btn-primary">Voltar</a>
             </div>
         </div>
     </form>

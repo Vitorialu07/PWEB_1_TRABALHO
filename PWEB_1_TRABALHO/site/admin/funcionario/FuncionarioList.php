@@ -5,7 +5,7 @@ include_once "../db.class.php";
 // Inicializa a variável para evitar erros caso o POST seja acionado
 
 // Post para quando o formulário for submetido
-$db = new db('usuario');
+$db = new db('funcionario');
 
 if (!empty($_GET['id'])) {
     $db->destroy($_GET['id']);

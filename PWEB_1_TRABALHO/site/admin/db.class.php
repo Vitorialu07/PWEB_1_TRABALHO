@@ -50,6 +50,10 @@ class db
 
     public function store($dados)
     {
+        if (isset($dados['id']) && empty($dados['id'])) {
+        unset($dados['id']);
+        }
+
         $campos = "";
         $marcadores = "";
         $vetorData = [];
@@ -71,33 +75,40 @@ class db
             $st = $this->conn->prepare($sql);
             $st->execute(params: $vetorData);
         } catch (PDOException $e) {
-           throw new Exception("Erro ao inserir", $e->getMessage());
+           throw new Exception("Erro ao inserir". $e->getMessage());
         }
     }
 
-public function update($dados)
-    {
-        $campos = "";
-        $vetorData = [];
-        $sep = "";
+    public function update($dados){
+    // Garante que $dados seja um array, mesmo se o formulário enviar como objeto
+    if (is_object($dados)) {
+        $dados = (array) $dados;
+    }
 
-        foreach ($dados as $campo => $valor) {
-            if ($campo !== 'id'){
+    $campos = "";
+    $vetorData = [];
+    $sep = "";
+
+    foreach ($dados as $campo => $valor) {
+        // Usamos trim() para garantir que não existam espaços escondidos como 'id ' ou ' id'
+        if (trim($campo) !== 'id') {
             $campos .= $sep . " $campo = ?";
             $vetorData[] = $valor;
             $sep = ", ";
-            }
-        }
-        $vetorData[]= $dados['id'];
-        $sql = "UPDATE $this->table_name SET $campos WHERE id= ?;";
-
-        try {
-            $st = $this->conn->prepare($sql);
-            $st->execute(params: $vetorData);
-        } catch (PDOException $e) {
-           throw new Exception("Erro ao inserir", $e->getMessage());
         }
     }
+    
+    // O ID da cláusula WHERE precisa do valor correto do ID enviado
+    $vetorData[] = $dados['id'];
+    $sql = "UPDATE $this->table_name SET $campos WHERE id = ?;";
+
+    try {
+        $st = $this->conn->prepare($sql);
+        $st->execute($vetorData); // Removido o 'params:' para evitar incompatibilidades de versão
+    } catch (PDOException $e) {
+        throw new Exception("Erro ao atualizar: " . $e->getMessage());
+    }
+}
      public function destroy($id){
         try{
                 $sql = "DELETE FROM $this->table_name WHERE id=?;"; 

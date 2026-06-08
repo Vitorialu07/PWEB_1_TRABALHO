@@ -41,7 +41,7 @@ if (empty($errors)) {
             $success = "Registro salvo com sucesso!";
             }else {
                 $db->update($_POST);
-                $sucess="Registro atualizado com sucesso!";
+                $success="Registro atualizado com sucesso!";
             }
             
             redirect('./ProdutoList.php');

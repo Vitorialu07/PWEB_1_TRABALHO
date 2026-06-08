@@ -43,7 +43,7 @@ if (!empty($_POST)) {
             $db->store($_POST); // $_POST é uma variável global que armazena o que é enviado no formulário 
             $success = "Registro salvo com sucesso!";
             }else {
-                $sucess="Registro atualizado com sucesso!";
+                $success="Registro atualizado com sucesso!";
             }
             
             redirect('./ClienteList.php');
@@ -90,7 +90,7 @@ if (!empty($_POST)) {
 
             <div class=" col-6">
                 <label for="telefone">Telefone</label>
-                <input type="number" name="telefone" class="form-control" value="<?php echo getFormValue($data, 'telefone') ?>">
+                <input type="text" name="telefone" class="form-control" value="<?php echo getFormValue($data, 'telefone') ?>">
             </div>
 
              <div class="col-6">

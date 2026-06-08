@@ -21,7 +21,7 @@ if (!empty($_POST)) {
 ?>
 <div class="row">
     <div class="row">
-        <form action="UsuarioList.php" method="post">
+        <form action="ClienteList.php" method="post">
             <div class="row">
                 <h3> Listagem de Clientes</h3>
                 <div class="col-2">
@@ -44,7 +44,7 @@ if (!empty($_POST)) {
                 </div>
                 <div class="col-5">
                     <button type="submit" class="btn btn-primary">Buscar</button>
-                    <a href="./UsuarioForm.php" class="btn btn-success">Novo</a>
+                    <a href="./ClienteForm.php" class="btn btn-success">Novo</a>
                 </div>
             </div>
         </form>
