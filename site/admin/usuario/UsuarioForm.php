@@ -1,6 +1,4 @@
 <?php
-include '../header.php';
-
 include_once "../db.class.php";
 
 $db = new db('usuario');
@@ -9,6 +7,7 @@ $actionError = '';
 $errors = [];
 $data = null;
 
+// Processamento ANTES de qualquer saída HTML
 if (!empty($_GET['id'])){
     $data = $db->find($_GET['id']);
 }
@@ -53,6 +52,9 @@ if (!empty($_POST)) {
         $actionError = $e->getMessage();
     }
 }
+
+// AGORA sim inclui o header (depois de todo processamento)
+include '../header.php';
 ?>
 
 <div class="container mt-4" style="max-width: 600px;">

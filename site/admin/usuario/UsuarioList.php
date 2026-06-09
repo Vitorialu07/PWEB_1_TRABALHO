@@ -1,11 +1,10 @@
 <?php
-include '../header.php';
-include '../autenticacao.php';
+// Primeiro, todo o processamento (sem saída HTML)
 include_once "../db.class.php";
 
 $db = new db('usuario');
 
-// Processa a exclusão (via GET)
+// Processa a exclusão (via GET) - ANTES de qualquer HTML
 if (!empty($_GET['id'])){
     $db->destroy($_GET['id']);
     header("Location: UsuarioList.php");
@@ -19,6 +18,9 @@ if (!empty($_POST['tipo']) && !empty($_POST['valor'])) {
     $dados = $db->all();
 }
 
+// AGORA sim inclui o header e autenticacao (depois do processamento)
+include '../header.php';
+include '../autenticacao.php';
 ?> 
 
 <div class="row mb-4">
@@ -44,7 +46,10 @@ if (!empty($_POST['tipo']) && !empty($_POST['valor'])) {
                 <?php endif; ?>
             </div>
         </div>
-    </form> </div> <div class="container mt-4">
+    </form> 
+</div> 
+
+<div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3>Lista de Usuários</h3>
         <a href="./UsuarioForm.php" class="btn btn-success">Novo Usuário</a>
@@ -64,10 +69,11 @@ if (!empty($_POST['tipo']) && !empty($_POST['valor'])) {
             <?php foreach($dados as $item): ?>
                 <tr>
                     <td><?php echo $item->id; ?></td>
-                    <td><?php echo $item->nome; ?></td>
-                    <td><?php echo $item->telefone; ?></td>
-                    <td><?php echo $item->email; ?></td>
-                    <td><a href="UsuarioForm.php?id=<?php echo (int)$item->id; ?>" class='btn btn-warning'>Editar</a>
+                    <td><?php echo htmlspecialchars($item->nome); ?></td>
+                    <td><?php echo htmlspecialchars($item->telefone); ?></td>
+                    <td><?php echo htmlspecialchars($item->email); ?></td>
+                    <td>
+                        <a href="UsuarioForm.php?id=<?php echo (int)$item->id; ?>" class='btn btn-warning btn-sm'>Editar</a>
                         <a class="btn btn-danger btn-sm" onclick="return confirm('Deseja realmente excluir?')" href="./UsuarioList.php?id=<?php echo $item->id; ?>">Deletar</a>
                     </td>
                 </tr>
