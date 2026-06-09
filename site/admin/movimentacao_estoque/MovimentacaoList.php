@@ -5,7 +5,7 @@ include_once "../db.class.php";
 
 $db = new db('movimentacao_estoque');
 $dbProduto = new db('produto');
-$dbFuncionario = new db('funcionario')
+$dbFuncionario = new db('funcionario');
 
 if (!empty($_GET['id'])) {
     $db->destroy($_GET['id']);

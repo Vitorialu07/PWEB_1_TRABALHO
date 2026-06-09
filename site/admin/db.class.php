@@ -79,7 +79,7 @@ class db
         }
     }
 
-    public function update($dados)
+   public function update($dados)
 {
     if (is_object($dados)) {
         $dados = (array) $dados;
@@ -105,9 +105,9 @@ class db
     $vetorData[] = $dados['id'];
     $sql = "UPDATE $this->table_name SET $campos WHERE id = ?;"; 
 
-    // Debug - veja o que está sendo executado
-    var_dump($sql, $vetorData);
-    exit;
+    // REMOVA OU COMENTE ESTAS LINHAS:
+    // var_dump($sql, $vetorData);
+    // exit;
 
     try {
         $st = $this->conn->prepare($sql);

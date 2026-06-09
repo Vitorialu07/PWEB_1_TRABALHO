@@ -1,24 +1,26 @@
 <?php
 include '../header.php';
-include_once "../database/db.class.php";
+include_once "../db.class.php";
 
 $db = new db('produto');
 $success = '';
 $actionError = '';
 $errors = [];
+$data = null;
 
 if (!empty($_GET['id'])){
-    $data=$db->find(id:$_GET['id']);
+    $data = $db->find($_GET['id']);
 }
 
 if (!empty($_POST)) {
-    $data=(object)$_POST;
+    $data = (object)$_POST;
 
     try {
         if (empty($_POST['nome'])) {
             $errors[] = "<li>O nome é obrigatório</li>";
         }
 
+        // CORRIGIDO: mudar 'descricao' para 'descrição' (com acento e ç)
         if (empty($_POST['descricao'])) {
             $errors[] = "<li>A descrição é obrigatória</li>";
         }
@@ -27,27 +29,37 @@ if (!empty($_POST)) {
             $errors[] = "<li>A marca é obrigatória</li>";
         }
         
-        if (empty($_POST['preco_custo'])) {
-            $errors[] = "<li>O preço de custo é obrigatório</li>";
+        if (empty($_POST['preco_custo']) || $_POST['preco_custo'] <= 0) {
+            $errors[] = "<li>O preço de custo é obrigatório e deve ser maior que zero</li>";
         }
 
-        if (empty($_POST['preco_venda'])) {
-            $errors[] = "<li>O preço de venda é obrigatório</li>";
+        if (empty($_POST['preco_venda']) || $_POST['preco_venda'] <= 0) {
+            $errors[] = "<li>O preço de venda é obrigatório e deve ser maior que zero</li>";
         }
 
-if (empty($errors)) {
+        if (empty($errors)) {
+            // CORRIGIDO: usar o nome correto da coluna 'descrição' no array
+            $dadosProduto = [
+                'nome' => $_POST['nome'],
+                'descrição' => $_POST['descricao'], // Atenção: nome com acento e ç
+                'marca' => $_POST['marca'],
+                'preco_custo' => str_replace(',', '.', $_POST['preco_custo']),
+                'preco_venda' => str_replace(',', '.', $_POST['preco_venda'])
+            ];
+            
             if (empty($_POST['id'])){
-            $db->store($_POST); // $_POST é uma variável global que armazena o que é enviado no formulário 
-            $success = "Registro salvo com sucesso!";
-            }else {
-                $db->update($_POST);
-                $success="Registro atualizado com sucesso!";
+                $db->store($dadosProduto);
+                $success = "Produto salvo com sucesso!";
+            } else {
+                $dadosProduto['id'] = $_POST['id'];
+                $db->update($dadosProduto);
+                $success = "Produto atualizado com sucesso!";
             }
             
             redirect('./ProdutoList.php');
         }
     } catch (PDOException $e) {
-        $actionError = $e->getMessage();
+        $actionError = "Erro no banco de dados: " . $e->getMessage();
     } catch (Exception $e) {
         $actionError = $e->getMessage();
     }
@@ -61,32 +73,37 @@ if (empty($errors)) {
         <h3> Cadastro de produtos</h3>
         <input type="hidden" name="id" value="<?php echo getFormValue($data, 'id');?>">
         <div class="row">
-            <div class=" col-6">
-                <label for="nome">Nome</label>
-                <input type="text" name="nome" class="form-control" value="<?php echo getFormValue($data,'nome') ?>">
+            <div class="col-6">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" name="nome" id="nome" class="form-control" value="<?php echo getFormValue($data, 'nome') ?>" required>
             </div>
             <div class="col-6">
-                <label for="descricao">descricao</label>
-                <input type="text" name="descricao" class="form-control" value="<?php echo getFormValue($data, 'descricao') ?>">
+                <label for="descricao" class="form-label">Descrição</label>
+                <input type="text" name="descricao" id="descricao" class="form-control" value="<?php echo getFormValue($data, 'descrição') ?>" required>
             </div>
 
-            <div class=" col-6">
-                <label for="marca">Marca</label>
-                <input type="text" name="marca" class="form-control" value="<?php echo getFormValue($data, 'marca') ?>">
+            <div class="col-6">
+                <label for="marca" class="form-label">Marca</label>
+                <input type="text" name="marca" id="marca" class="form-control" value="<?php echo getFormValue($data, 'marca') ?>" required>
             </div>
 
-            <div class=" col-6">
-                <label for="preco_custo">Preço de custo</label>
-                <input type="number" name="preco_custo" class="form-control" value="<?php echo getFormValue($data, 'preco_custo') ?>">
+            <div class="col-6">
+                <label for="preco_custo" class="form-label">Preço de custo (R$)</label>
+                <input type="number" step="0.01" name="preco_custo" id="preco_custo" class="form-control" value="<?php echo getFormValue($data, 'preco_custo') ?>" required>
             </div>
 
-            <div class=" col-6">
-                <label for="preco_venda">Preço de venda</label>
-                <input type="number" name="preco_venda" class="form-control" value="<?php echo getFormValue($data, 'preco_venda') ?>">
+            <div class="col-6">
+                <label for="preco_venda" class="form-label">Preço de venda (R$)</label>
+                <input type="number" step="0.01" name="preco_venda" id="preco_venda" class="form-control" value="<?php echo getFormValue($data, 'preco_venda') ?>" required>
             </div>
-            <div class="mt-2">
-                <button type="submit" class="btn btn-success">Salvar</button>
-                <a href="./ProdutoList.php" class="btn btn-primary">Voltar</a>
+            
+            <div class="col-12 mt-4">
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-save"></i> Salvar
+                </button>
+                <a href="./ProdutoList.php" class="btn btn-primary">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                </a>
             </div>
         </div>
     </form>

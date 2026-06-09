@@ -106,12 +106,12 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela db_web_luiza_vitoria_banco.usuario: ~0 rows (aproximadamente)
-INSERT INTO `usuario` (`id`, `nome`, `email`, `login`, `senha`, `telefone`) VALUES
+/*INSERT INTO `usuario` (`id`, `nome`, `email`, `login`, `senha`, `telefone`) VALUES
 	(2, 'Vitoria', 'vitoria@gmail.com', 'vitoria', '123', '499999999'),
 	(3, 'ana', 'ana@banana', 'ana', '$2y$10$16JGao/N/PJ6hphfhTXFdOgkkiXWAMBzHvgN2aKy18xoIv9teRGqS', '99999'),
 	(8, 'Luiza', 'luiza@gmail.com ', 'luiza', '$2y$10$OMXagKYTZO5M/wLdav1UueTZhaQJNR5frg4hj8PedZTG47bVBHoeG', '9999'),
 	(9, 'Vitoria', 'vi@gmail', 'vitoria', '$2y$10$RO9GBkigK.NY7RgxQs23VOhwmel8Fh7hxCkYoUin70j3mwQLmTswa', '999');
-
+*/
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;

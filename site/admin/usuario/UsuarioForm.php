@@ -1,5 +1,6 @@
 <?php
 include '../header.php';
+
 include_once "../db.class.php";
 
 $db = new db('usuario');
