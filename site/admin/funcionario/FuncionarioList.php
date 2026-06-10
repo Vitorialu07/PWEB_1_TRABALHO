@@ -1,17 +1,19 @@
 <?php
-// PRIMEIRO: todo processamento (sem saida HTML)
+
 include_once "../db.class.php";
 
 $db = new db('funcionario');
 $erro_exclusao = '';
 
+
 if (!empty($_GET['id'])) {
     try {
-        $db->destroy($_GET['id']);
+        $db->softDelete($_GET['id']);  
+        $_SESSION['success'] = "Funcionário desativado com sucesso!";
         header("Location: FuncionarioList.php");
         exit;
     } catch (Exception $e) {
-        $erro_exclusao = "Nao e possivel excluir este funcionario pois ele possui movimentacoes de estoque associadas!";
+        $erro_exclusao = "Erro ao desativar funcionário: " . $e->getMessage();
     }
 }
 
@@ -21,7 +23,7 @@ if (!empty($_POST)) {
     $dados = $db->all();
 }
 
-// DEPOIS: inclui os headers e HTML
+
 include '../header.php';
 include '../autenticacao.php';
 ?>

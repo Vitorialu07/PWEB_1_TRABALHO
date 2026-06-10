@@ -7,10 +7,23 @@ $success = '';
 $actionError = '';
 $errors = [];
 $data = null;
-
+$readonly = '';
+$disabled = '';
+$warning = '';
 
 if (!empty($_GET['id'])){
     $data = $db->find($_GET['id']);
+    
+    
+    if ($data && isset($data->ativo) && $data->ativo == 0) {
+        $readonly = 'readonly';
+        $disabled = 'disabled';
+        $warning = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <i class="fas fa-exclamation-triangle"></i> 
+                        Este produto está <strong>INATIVO</strong>. Apenas visualização permitida.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>';
+    }
 }
 
 if (!empty($_POST)) {
@@ -21,7 +34,6 @@ if (!empty($_POST)) {
             $errors[] = "<li>O nome é obrigatório</li>";
         }
 
-        // CORRIGIDO: mudar 'descricao' para 'descrição' (com acento e ç)
         if (empty($_POST['descricao'])) {
             $errors[] = "<li>A descrição é obrigatória</li>";
         }
@@ -39,10 +51,9 @@ if (!empty($_POST)) {
         }
 
         if (empty($errors)) {
-            // CORRIGIDO: usar o nome correto da coluna 'descrição' no array
             $dadosProduto = [
                 'nome' => $_POST['nome'],
-                'descrição' => $_POST['descricao'], // Atenção: nome com acento e ç
+                'descrição' => $_POST['descricao'],
                 'marca' => $_POST['marca'],
                 'preco_custo' => str_replace(',', '.', $_POST['preco_custo']),
                 'preco_venda' => str_replace(',', '.', $_POST['preco_venda'])
@@ -69,6 +80,9 @@ if (!empty($_POST)) {
 <div class="row">
     <?php actionMessage($success, $actionError) ?>
     <?php showValidationError($errors) ?>
+    
+    
+    <?php echo $warning; ?>
 
     <form action="ProdutoForm.php" method="post">
         <h3> Cadastro de produtos</h3>
@@ -76,32 +90,44 @@ if (!empty($_POST)) {
         <div class="row">
             <div class="col-6">
                 <label for="nome" class="form-label">Nome</label>
-                <input type="text" name="nome" id="nome" class="form-control" value="<?php echo getFormValue($data, 'nome') ?>" required>
+                <input type="text" name="nome" id="nome" class="form-control" 
+                       value="<?php echo getFormValue($data, 'nome') ?>" 
+                       <?php echo $readonly; ?> required>
             </div>
             <div class="col-6">
                 <label for="descricao" class="form-label">Descrição</label>
-                <input type="text" name="descricao" id="descricao" class="form-control" value="<?php echo getFormValue($data, 'descrição') ?>" required>
+                <input type="text" name="descricao" id="descricao" class="form-control" 
+                       value="<?php echo getFormValue($data, 'descrição') ?>" 
+                       <?php echo $readonly; ?> required>
             </div>
 
             <div class="col-6">
                 <label for="marca" class="form-label">Marca</label>
-                <input type="text" name="marca" id="marca" class="form-control" value="<?php echo getFormValue($data, 'marca') ?>" required>
+                <input type="text" name="marca" id="marca" class="form-control" 
+                       value="<?php echo getFormValue($data, 'marca') ?>" 
+                       <?php echo $readonly; ?> required>
             </div>
 
             <div class="col-6">
                 <label for="preco_custo" class="form-label">Preço de custo (R$)</label>
-                <input type="number" step="0.01" name="preco_custo" id="preco_custo" class="form-control" value="<?php echo getFormValue($data, 'preco_custo') ?>" required>
+                <input type="number" step="0.01" name="preco_custo" id="preco_custo" class="form-control" 
+                       value="<?php echo getFormValue($data, 'preco_custo') ?>" 
+                       <?php echo $readonly; ?> required>
             </div>
 
             <div class="col-6">
                 <label for="preco_venda" class="form-label">Preço de venda (R$)</label>
-                <input type="number" step="0.01" name="preco_venda" id="preco_venda" class="form-control" value="<?php echo getFormValue($data, 'preco_venda') ?>" required>
+                <input type="number" step="0.01" name="preco_venda" id="preco_venda" class="form-control" 
+                       value="<?php echo getFormValue($data, 'preco_venda') ?>" 
+                       <?php echo $readonly; ?> required>
             </div>
             
             <div class="col-12 mt-4">
-                <button type="submit" class="btn btn-success">
-                    <i class="fas fa-save"></i> Salvar
-                </button>
+                <?php if($disabled != 'disabled'): ?>
+                    <button type="submit" class="btn btn-success" <?php echo $disabled; ?>>
+                        <i class="fas fa-save"></i> Salvar
+                    </button>
+                <?php endif; ?>
                 <a href="./ProdutoList.php" class="btn btn-primary">
                     <i class="fas fa-arrow-left"></i> Voltar
                 </a>
@@ -112,4 +138,3 @@ if (!empty($_POST)) {
 
 <?php
 include '../footer.php';
-?>

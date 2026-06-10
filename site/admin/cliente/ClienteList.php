@@ -4,7 +4,6 @@ include '../autenticacao.php';
 include_once "../db.class.php";
 
 
-// Post para quando o formulário for submetido
 $db = new db('cliente');
 
 if (!empty($_GET['id'])) {
@@ -15,8 +14,7 @@ if (!empty($_POST)) {
     $dados = $db->search($_POST);
 } else {
     $dados = $db->all();
-    //  var_dump($dados);
-    // exit;
+    
 }
 ?>
 <div class="row">
@@ -32,7 +30,7 @@ if (!empty($_POST)) {
                         <option value="cpf">CPF</option>
                         <option value="cnpj">CNPJ</option>
                         <option value="telefone">Telefone</option>
-                        <option value="nome">Email</option>
+                        <option value="email">Email</option>
                         <option value="rua">Rua</option>
                         <option value="cidade">Cidade</option>
                         <option value="cep">CEP</option>

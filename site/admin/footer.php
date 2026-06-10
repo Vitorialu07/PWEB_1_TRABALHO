@@ -1,7 +1,7 @@
-            </div> <!-- Fechando conteúdo principal -->
-        </div> <!-- Fechando col -->
-    </div> <!-- Fechando row -->
-</div> <!-- Fechando container-fluid -->
+            </div> 
+        </div> 
+    </div>
+</div> 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -14,7 +14,7 @@
         }
     });
     
-    // Auto fechar alertas após 5 segundos
+    
     setTimeout(() => {
         document.querySelectorAll('.alert').forEach(alert => {
             const bsAlert = new bootstrap.Alert(alert);

@@ -21,7 +21,7 @@ echo "<h2 class='mb-0'><i class='fas fa-arrow-up'></i> Aumentando Estoque do Sis
 echo "</div>";
 echo "<div class='card-body'>";
 
-// ==================== AUMENTAR ESTOQUE ====================
+
 $dbEstoque = new db('estoque');
 $dbProduto = new db('produto');
 

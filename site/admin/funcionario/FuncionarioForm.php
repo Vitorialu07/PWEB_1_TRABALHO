@@ -6,19 +6,18 @@ $db = new db('funcionario');
 $success = '';
 $actionError = '';
 $errors = [];
-$data = null; // Inicializar a variável $data
+$data = null; 
 
-// Buscar dados se tiver ID
 if (!empty($_GET['id'])){
     $data = $db->find(id: $_GET['id']);
 }
 
-// Processar formulário
+
 if (!empty($_POST)) {
     $data = (object)$_POST;
 
     try {
-        // Validações
+        
         if (empty($_POST['nome'])) {
             $errors[] = "<li>O nome é obrigatório</li>";
         }
@@ -51,9 +50,9 @@ if (!empty($_POST)) {
             $errors[] = "<li>Salário inválido</li>";
         }
 
-        // Se não houver erros, salvar
+        
         if (empty($errors)) {   
-            // Remover campos vazios (como demissão que pode ser null)
+            
             $dadosParaSalvar = $_POST;
             if (empty($dadosParaSalvar['demissao'])) {
                 $dadosParaSalvar['demissao'] = null;
@@ -76,7 +75,6 @@ if (!empty($_POST)) {
     }
 }
 
-// Função helper para formatar valor do formulário
 function getFormValueSafe($data, $field, $default = '') {
     if (isset($data) && is_object($data) && property_exists($data, $field)) {
         return htmlspecialchars($data->$field);
@@ -149,7 +147,6 @@ function getFormValueSafe($data, $field, $default = '') {
                             <select name="status" id="status" class="form-select" required>
                                 <option value="">Selecione o status</option>
                                 <option value="Ativo" <?php echo (getFormValueSafe($data, 'status') == 'Ativo') ? 'selected' : ''; ?>>Ativo</option>
-                                <option value="Inativo" <?php echo (getFormValueSafe($data, 'status') == 'Inativo') ? 'selected' : ''; ?>>Inativo</option>
                                 <option value="Férias" <?php echo (getFormValueSafe($data, 'status') == 'Férias') ? 'selected' : ''; ?>>Férias</option>
                                 <option value="Afastado" <?php echo (getFormValueSafe($data, 'status') == 'Afastado') ? 'selected' : ''; ?>>Afastado</option>
                             </select>
@@ -178,7 +175,7 @@ function getFormValueSafe($data, $field, $default = '') {
 </div>
 
 <script>
-// Máscara para CPF (opcional)
+
 document.getElementById('cpf')?.addEventListener('input', function(e) {
     let value = e.target.value.replace(/\D/g, '');
     if (value.length > 11) value = value.slice(0, 11);

@@ -1,9 +1,9 @@
 <?php
-include 'header.php';
+require_once 'autenticacao.php';  
+require_once 'header.php';   
 include_once "db.class.php";
-include 'autenticacao.php';
 
-// Instanciar as classes necessárias
+
 $dbUsuario = new db('usuario');
 $dbCliente = new db('cliente');
 $dbProduto = new db('produto');
@@ -11,19 +11,19 @@ $dbFuncionario = new db('funcionario');
 $dbEstoque = new db('estoque');
 $dbMovimentacao = new db('movimentacao_estoque');
 
-// Contadores para o dashboard
+
 $totalUsuarios = count($dbUsuario->all());
 $totalClientes = count($dbCliente->all());
 $totalProdutos = count($dbProduto->all());
 $totalFuncionarios = count($dbFuncionario->all());
 
-// Últimos clientes cadastrados
+
 $ultimosClientes = array_slice($dbCliente->all(), -5);
 
-// Últimos produtos cadastrados
+
 $ultimosProdutos = array_slice($dbProduto->all(), -5);
 
-// Produtos com estoque baixo (menos de 10 unidades)
+
 $estoqueBaixo = [];
 $todosEstoques = $dbEstoque->all();
 foreach($todosEstoques as $item) {
@@ -39,7 +39,7 @@ foreach($todosEstoques as $item) {
     }
 }
 
-// Total de movimentações
+
 $totalMovimentacoes = count($dbMovimentacao->all());
 ?>
 
@@ -80,7 +80,7 @@ $totalMovimentacoes = count($dbMovimentacao->all());
         letter-spacing: -0.5px;
     }
 
-    /* Cards do Dashboard Metálicos/Limpos */
+
     .card-zeiss {
         background: #FFFFFF;
         border: 1px solid var(--zeiss-border);

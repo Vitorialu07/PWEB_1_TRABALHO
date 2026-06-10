@@ -13,7 +13,7 @@ if (!empty($_GET['id'])){
 }
 
 if (!empty($_POST)) {
-    $data=(object)$_POST;
+    $data = (object)$_POST;
     try {
         if (empty($_POST['nome'])) {
             $errors[] = "<li>O nome é obrigatório</li>";
@@ -23,28 +23,29 @@ if (!empty($_POST)) {
             $errors[] = "<li>O email é obrigatório</li>";
         }
 
-          if (empty($_POST['telefone'])) {
+        if (empty($_POST['telefone'])) {
             $errors[] = "<li>O telefone é obrigatório</li>";
         }
 
-          if (empty($_POST['rua'])) {
+        if (empty($_POST['rua'])) {
             $errors[] = "<li>A rua é obrigatório</li>";
         }
 
-          if (empty($_POST['cidade'])) {
+        if (empty($_POST['cidade'])) {
             $errors[] = "<li>A cidade é obrigatória</li>";
         }
 
-          if (empty($_POST['cep'])) {
+        if (empty($_POST['cep'])) {
             $errors[] = "<li>O cep é obrigatório</li>";
         }
 
         if (empty($errors)) {
-            if (empty($_POST['id'])){
-            $db->store($_POST); // $_POST é uma variável global que armazena o que é enviado no formulário 
-            $success = "Registro salvo com sucesso!";
-            }else {
-                $success="Registro atualizado com sucesso!";
+            if (empty($_POST['id'])) {
+                $db->store($_POST); 
+                $success = "Registro salvo com sucesso!";
+            } else {
+                $db->update($_POST); 
+                $success = "Registro atualizado com sucesso!";
             }
             
             redirect('./ClienteList.php');
