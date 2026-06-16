@@ -31,16 +31,16 @@ if (!empty($_POST)) {
             // Busca no banco de dados pela coluna 'login'
             $usuario = $db->findBy('login', $_POST['login']);
             
-            if ($usuario && $_POST['senha'] === $usuario->senha) {
-                $_SESSION['usuario_id']    = $usuario->id;
-                $_SESSION['usuario_nome']  = $usuario->nome;
-                $_SESSION['usuario_login'] = $usuario->login;   
-            
-                $success = "Usuário logado com sucesso, redirecionando para index...";
-                redirect('./index.php');
-            } else {
-                $actionError = "Login ou senha inválidos. Tente novamente.";
-            }
+        if ($usuario && password_verify($_POST['senha'], $usuario->senha)) {
+            $_SESSION['usuario_id']    = $usuario->id;
+            $_SESSION['usuario_nome']  = $usuario->nome;
+            $_SESSION['usuario_login'] = $usuario->login;   
+
+            $success = "Usuário logado com sucesso, redirecionando para index...";
+            redirect('./index.php');
+        } else {
+            $actionError = "Login ou senha inválidos. Tente novamente.";
+        }
         }
     } catch (PDOException $e) {
         $actionError = $e->getMessage();
